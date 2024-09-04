@@ -6,8 +6,8 @@ import { useSearchParams } from 'next/navigation';
 function Play() {
     const router = useRouter();
     const [query, setQuery] = useState({});
-    const [player1Score, setPlayer1Score] = useState(0); // Initial score for player 1
-    const [player2Score, setPlayer2Score] = useState(0); // Initial score for player 2
+    const [player1Score, setPlayer1Score] = useState(0); 
+    const [player2Score, setPlayer2Score] = useState(0); 
     const [scoreInput, setScoreInput] = useState(0);
     var [player1Turn, setPlayer1Turn] = useState(true);
     var [scoreHist, setScoreHist] = useState([]);
@@ -37,7 +37,7 @@ function Play() {
             setScoreHist2(prevHistory => [...prevHistory, { score, remaining: gameScore - newScore }]);
             setPlayer1Turn(true);
         }
-        setScoreInput(0); // Clear the input after adding the score
+        setScoreInput(0); 
     }
 
     return (
