@@ -11,6 +11,7 @@ function Play() {
     const [player1Score, setPlayer1Score] = useState(30); // Initial score for player 1
     const [player2Score, setPlayer2Score] = useState(20); // Initial score for player 2
     const [scoreInput, setScoreInput] = useState(0);
+    var [player1Turn, setPlayer1Turn] = useState(true);
 
     useEffect(() => {
         if (router.query) {
@@ -21,10 +22,16 @@ function Play() {
     const searchParams = useSearchParams()
     const player1Name = searchParams.get('player1Name')
     const player2Name = searchParams.get('player2Name');
-
+    
     function addScore(){
         console.log("adding a score of "+ scoreInput);
-        setPlayer1Score(prevScore => prevScore + Number(scoreInput));
+        if(player1Turn){
+            setPlayer1Score(prevScore => prevScore + Number(scoreInput));
+            setPlayer1Turn(false);
+        }else{
+            setPlayer2Score(prevScore => prevScore + Number(scoreInput));
+            setPlayer1Turn(true);
+        }
     }
 
     return (
