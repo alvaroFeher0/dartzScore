@@ -79,7 +79,7 @@ function Play() {
             <button class="addScoreBtn"onClick={addScore}>Add Score</button>
             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ flex: 1, marginRight: '10px' }}>
-                    <h2>{player1Name || 'Player 1'}'s History</h2>
+                    <h2>{player1Name || 'Player 1'}s History</h2>
                     <ul>
                         {scoreHist.map((entry, index) => (
                             <li key={index}>Score: {entry.score}, Remaining: {entry.remaining}</li>
@@ -87,7 +87,7 @@ function Play() {
                     </ul>
                 </div>
                 <div style={{ flex: 1, marginLeft: '10px' }}>
-                    <h2>{player2Name || 'Player 2'}'s History</h2>
+                    <h2>{player2Name || 'Player 2'}s History</h2>
                     <ul>
                         {scoreHist2.map((entry, index) => (
                             <li key={index}>Score: {entry.score}, Remaining: {entry.remaining}</li>
