@@ -42,10 +42,7 @@ function Play() {
             if(!checkWin(newScore, player1Name)){
                 setPlayer1Score(newScore);
                 setScoreHist(prevHistory => [...prevHistory, { score, remaining: gameScore - newScore }]);
-            }else{
-                // add pop up to restart or go to home
             }
-            
             setPlayer1Turn(false);
         } else {
             const newScore = player2Score + score;
@@ -57,17 +54,29 @@ function Play() {
     }
 
     return (
-        <div>
-            <h1>Play Page</h1>
-            <button>Home</button>
-            <button>Restart</button>
-            <p>Player 1: {player1Name || 'Loading...'}</p>
-            <p>Player 2: {player2Name || 'Loading...'}</p>
-            <p className="score">Player1 score: {gameScore - player1Score}</p>
-            <p className="score">Player2 score: {gameScore - player2Score}</p>
-            <input type="number" min="0" max="60" value={scoreInput} 
+        <div class="App">
+            <div class="topContainer">
+                <h1>Dartz Score</h1>
+                <div class="topBtns">
+                    <button>Home</button>
+                    <button>Restart</button>
+                </div>
+             
+            </div>
+            <div class="scoreContainer">
+                <div class = "playerContainer">
+                    <p>{player1Name || 'Player 1'}</p>
+                    <p className="score">{gameScore - player1Score}</p>
+                </div>
+                <div class="playerContainer">
+                    <p>{player2Name || 'Player 2'}</p>
+                    <p className="score">{gameScore - player2Score}</p>
+                </div>
+            </div>
+            
+            <input class="numInput" type="number" min="0" max="60" value={scoreInput} 
                 onChange={(e) => setScoreInput(e.target.value)} />
-            <button onClick={addScore}>Add Score</button>
+            <button class="addScoreBtn"onClick={addScore}>Add Score</button>
             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between' }}>
                 <div style={{ flex: 1, marginRight: '10px' }}>
                     <h2>{player1Name || 'Player 1'}'s History</h2>
