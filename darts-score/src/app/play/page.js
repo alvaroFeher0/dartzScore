@@ -1,6 +1,7 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 
@@ -119,4 +120,10 @@ function Play() {
     );
 }
 
-export default Play;
+const PlayPageWithSuspense = () => (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Play />
+    </Suspense>
+  );
+
+export default PlayPageWithSuspense;
