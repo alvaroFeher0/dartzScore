@@ -14,7 +14,7 @@ function Play() {
     var [player1Turn, setPlayer1Turn] = useState(true);
     var [scoreHist, setScoreHist] = useState([]);
     var [scoreHist2, setScoreHist2] = useState([]);
-    const gameScore = 301;
+    
     const [showModal, setShowModal] = useState(false);
     const [winner, setWinner] = useState('');
     useEffect(() => {
@@ -26,9 +26,26 @@ function Play() {
     const searchParams = useSearchParams();
     const player1Name = searchParams.get('player1Name');
     const player2Name = searchParams.get('player2Name');
+    const gameScore = searchParams.get('gamemode');
+    
+    function goHome(){
+        router.push("/");
+        setShowModal(false);
+    }
+
+    function restart(){
+        console.log(gameScore);
+       setPlayer1Score(0);
+       setPlayer2Score(0);
+       setScoreHist([]);
+        setScoreHist2([]);
+        setPlayer1Turn(true);
+        setShowModal(false);
+    }
 
     function checkWin(score, playerName){
         if(score == gameScore){
+            console.log(player1Name + "won the game")
             setWinner(playerName);
             setShowModal(true);
             return true; 
@@ -40,15 +57,17 @@ function Play() {
         const score = Number(scoreInput);
         if (player1Turn) {
             const newScore = player1Score + score;
-            if(!checkWin(newScore, player1Name)){
+            if(!checkWin(newScore, player1Name) && newScore < gameScore){
                 setPlayer1Score(newScore);
                 setScoreHist(prevHistory => [...prevHistory, { score, remaining: gameScore - newScore }]);
             }
             setPlayer1Turn(false);
         } else {
             const newScore = player2Score + score;
-            setPlayer2Score(newScore);
-            setScoreHist2(prevHistory => [...prevHistory, { score, remaining: gameScore - newScore }]);
+            if(!checkWin(newScore, player2Name) && newScore < gameScore){
+                setPlayer2Score(newScore);
+                setScoreHist2(prevHistory => [...prevHistory, { score, remaining: gameScore - newScore }]);
+            }
             setPlayer1Turn(true);
         }
         setScoreInput(0); 
@@ -59,8 +78,8 @@ function Play() {
             <div class="topContainer">
                 <h1>Dartz Score</h1>
                 <div class="topBtns">
-                    <button>Home</button>
-                    <button>Restart</button>
+                    <button onClick={goHome}>Home</button>
+                    <button onClick={restart}>Restart</button>
                 </div>
              
             </div>
@@ -104,8 +123,8 @@ function Play() {
                     zIndex: 1000, textAlign: 'center'
                 }}>
                     <h2>{winner} Wins!</h2>
-                    <button  style={{ marginRight: '10px' }}>Restart</button>
-                    <button >Go to Home</button>
+                    <button  onClick={restart}style={{ marginRight: '10px' }}>Restart</button>
+                    <button onClick={goHome}>Go to Home</button>
                 </div>
             )}
 

@@ -15,6 +15,7 @@ function PlayerNames() {
   const router = useRouter();
   
     const [selected, setSelected] = useState('301');
+    
     const handleSelect = (value) => {
       setSelected(value);
     };
@@ -22,12 +23,13 @@ function PlayerNames() {
   const handleSubmit = (event) => {
     event.preventDefault();
     
-    const player1Name = document.getElementById('player1Name').value;
-    const player2Name = document.getElementById('player2Name').value;
-   //const gameMode = document.querySelector('.gamemodes button.active').textContent;
+   const player1NameInput = document.getElementById('player1Name').value.trim();
+   const player2NameInput = document.getElementById('player2Name').value.trim();
 
-    // Pass the values to the next page using query parameters
-    router.push(`/play?player1Name=${player1Name}&player2Name=${player2Name}`);
+   const player1Name = player1NameInput === "" ? "Player 1" : player1NameInput;
+   const player2Name = player2NameInput === "" ? "Player 2" : player2NameInput;
+    
+  router.push(`/play?player1Name=${player1Name}&player2Name=${player2Name}&gamemode=${selected}`);
   };
 
   return (
