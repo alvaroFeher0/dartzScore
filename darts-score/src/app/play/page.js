@@ -84,12 +84,12 @@ function Play() {
              
             </div>
             <div class="scoreContainer">
-                <div class = "playerContainer">
-                    <p>{player1Name || 'Player 1'}</p>
+                <div class="playerContainer">
+                    <p>{player1Name || 'Player 1'} {player1Turn && <span className="turnDot"></span>}</p>
                     <p className="score">{gameScore - player1Score}</p>
                 </div>
                 <div class="playerContainer">
-                    <p>{player2Name || 'Player 2'}</p>
+                    <p>{player2Name || 'Player 2'} {!player1Turn && <span className="turnDot"></span>}</p>
                     <p className="score">{gameScore - player2Score}</p>
                 </div>
             </div>
